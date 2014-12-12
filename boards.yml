@@ -1,0 +1,13 @@
+
+- type: empty
+  size: 3
+  mines: []
+- type: easy
+  size: 3
+  mines: [[1, 1]]
+- type: medium
+  size: 5
+  mines: [[1, 1], [2, 2], [2, 3], [2, 4]]
+- type: hard
+  size: 8
+  mines: [[5, 5], [5, 6], [5, 7], [6, 5], [6, 7], [7, 5], [7, 6], [7, 7]]

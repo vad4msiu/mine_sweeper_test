@@ -13,33 +13,45 @@ describe MineSweeper do
   end
 
   describe 'board rendering' do
+    shared_examples "successfully renders" do
+      it 'successfully renders' do
+        ms = MineSweeper.new board_type
+
+        ms.render buffer
+        expect(buffer.string).to eq(expected_result)
+      end
+    end
+
     let(:buffer) { StringIO.new '' }
 
-    it 'successfully renders the empty board' do
-      ms = MineSweeper.new 'empty'
+    context "with the empty board" do
+      let(:board_type) { 'empty'}
+      let(:expected_result) { "...\n...\n...\n" }
 
-      ms.render buffer
-      buffer.string.should == "...\n...\n...\n"
+      include_examples "successfully renders"
     end
 
-    it 'successfully renders the easy board' do
-      ms = MineSweeper.new 'easy'
-      ms.render buffer
-      buffer.string.should == "111\n1*1\n111\n"
+    context "with the easy board" do
+      let(:board_type) { 'easy'}
+      let(:expected_result) { "111\n1*1\n111\n" }
+
+      include_examples "successfully renders"
     end
 
-    it 'successfully renders the medium board' do
-      ms = MineSweeper.new 'medium'
-      ms.render buffer
-      buffer.string.should == "111..\n1*21.\n13*2.\n.3*3.\n.2*2.\n"
+    context "with the medium board" do
+      let(:board_type) { 'medium'}
+      let(:expected_result) { "111..\n1*21.\n13*2.\n.3*3.\n.2*2.\n" }
+
+      include_examples "successfully renders"
     end
 
-    it 'successfully renders the hard board' do
-      ms = MineSweeper.new 'hard'
-      ms.render buffer
-      buffer.string.should == "........\n........\n........\n........\n....1232\n....2***\n....3*8*\n....2***\n"
-    end
+    context "with the hard board" do
+      let(:board_type) { 'hard'}
+      let(:expected_result) {
+        "........\n........\n........\n........\n....1232\n....2***\n....3*8*\n....2***\n"
+      }
 
+      include_examples "successfully renders"
+    end
   end
-
 end
